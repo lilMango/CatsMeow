@@ -13,6 +13,12 @@
 		5671D4FD27955B08003020AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5671D4FB27955B08003020AB /* Main.storyboard */; };
 		5671D4FF27955B09003020AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5671D4FE27955B09003020AB /* Assets.xcassets */; };
 		5671D50227955B09003020AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5671D50027955B09003020AB /* LaunchScreen.storyboard */; };
+		5671D50A27955C83003020AB /* CatsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5671D50927955C83003020AB /* CatsService.swift */; };
+		5671D50C279565F4003020AB /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5671D50B279565F4003020AB /* Cat.swift */; };
+		5671D5102795FC1A003020AB /* Iso8601FormatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5671D50F2795FC1A003020AB /* Iso8601FormatExtensions.swift */; };
+		5671D51C27965E43003020AB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5671D51B27965E43003020AB /* Constants.swift */; };
+		5671D53E27967ED2003020AB /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5671D53D27967ED2003020AB /* ItemCell.swift */; };
+		5671D5432796AAEF003020AB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5671D5422796AAEF003020AB /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,11 @@
 		5671D4FE27955B09003020AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5671D50127955B09003020AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5671D50327955B09003020AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5671D50927955C83003020AB /* CatsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsService.swift; sourceTree = "<group>"; };
+		5671D50B279565F4003020AB /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
+		5671D50F2795FC1A003020AB /* Iso8601FormatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso8601FormatExtensions.swift; sourceTree = "<group>"; };
+		5671D51B27965E43003020AB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5671D53D27967ED2003020AB /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5671D5432796AAEF003020AB /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,12 +71,57 @@
 				5671D4F527955B08003020AB /* AppDelegate.swift */,
 				5671D4F727955B08003020AB /* SceneDelegate.swift */,
 				5671D4F927955B08003020AB /* ViewController.swift */,
+				5671D51727965D57003020AB /* Components */,
+				5671D51A27965E35003020AB /* Configs */,
+				5671D51627965283003020AB /* Services */,
+				5671D50D2795FAE0003020AB /* Extensions */,
+				5671D511279651F4003020AB /* Models */,
 				5671D4FB27955B08003020AB /* Main.storyboard */,
 				5671D4FE27955B09003020AB /* Assets.xcassets */,
 				5671D50027955B09003020AB /* LaunchScreen.storyboard */,
 				5671D50327955B09003020AB /* Info.plist */,
 			);
 			path = CatsMeow;
+			sourceTree = "<group>";
+		};
+		5671D50D2795FAE0003020AB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5671D50F2795FC1A003020AB /* Iso8601FormatExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5671D511279651F4003020AB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5671D50B279565F4003020AB /* Cat.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5671D51627965283003020AB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5671D50927955C83003020AB /* CatsService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		5671D51727965D57003020AB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5671D53D27967ED2003020AB /* ItemCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		5671D51A27965E35003020AB /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				5671D51B27965E43003020AB /* Constants.swift */,
+			);
+			path = Configs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +140,9 @@
 			dependencies = (
 			);
 			name = CatsMeow;
+			packageProductDependencies = (
+				5671D5422796AAEF003020AB /* SDWebImage */,
+			);
 			productName = CatsMeow;
 			productReference = 5671D4F227955B08003020AB /* CatsMeow.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +171,9 @@
 				Base,
 			);
 			mainGroup = 5671D4E927955B08003020AB;
+			packageReferences = (
+				5671D5412796AAEF003020AB /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 5671D4F327955B08003020AB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,7 +201,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5671D50A27955C83003020AB /* CatsService.swift in Sources */,
+				5671D5102795FC1A003020AB /* Iso8601FormatExtensions.swift in Sources */,
 				5671D4FA27955B08003020AB /* ViewController.swift in Sources */,
+				5671D51C27965E43003020AB /* Constants.swift in Sources */,
+				5671D53E27967ED2003020AB /* ItemCell.swift in Sources */,
+				5671D50C279565F4003020AB /* Cat.swift in Sources */,
 				5671D4F627955B08003020AB /* AppDelegate.swift in Sources */,
 				5671D4F827955B08003020AB /* SceneDelegate.swift in Sources */,
 			);
@@ -360,6 +428,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5671D5412796AAEF003020AB /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5671D5422796AAEF003020AB /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5671D5412796AAEF003020AB /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5671D4EA27955B08003020AB /* Project object */;
 }
