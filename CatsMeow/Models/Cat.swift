@@ -11,7 +11,6 @@ import Foundation
 struct Cat: Codable, Hashable {
     let id: String
     let createdAt: Date
-   
     let tags: [String]
     
     enum CodingKeys: String, CodingKey {
@@ -35,4 +34,8 @@ struct Cat: Codable, Hashable {
         return Cat(id: "hiii", createdAt:Date.now, tags:[])
     }
 
+    // Hashable protocol
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }    
 }

@@ -19,6 +19,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        
+        let search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchBar.placeholder = "Find a cat type"
+        navigationItem.searchController = search
         
         // Do any additional setup after loading the view.
         DispatchQueue.global().async {
@@ -26,31 +33,14 @@ class ViewController: UIViewController {
                 print(CatsService.shared.getRandomCat())
                 let url = URL(string: CatsService.shared.getCats(with: "gif", skipTo: 0, limit: 20))!
                 let data = try Data(contentsOf: url)
-                //2016-06-07T17:20:00Z
-                //2021-11-11T10:05:13.645Z
-//                let jsonString = """
-//                {
-//                    "id": "618cead9536db3001894b4f2",
-//                    "created_at": "2021-11-11T10:05:13.645Z",
-//                    "tags": [
-//                        "nelut",
-//                        "happy",
-//                        "gixf"
-//                    ],
-//                    "url": "/cat/618cead9536db3001894b4f2"
-//                }
-//                """
-//                let data = Data(jsonString.utf8)
+
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
                 
-//                let decodedCat = try decoder.decode(Cat.self, from: data)
-                let decodedCat = try decoder.decode([Cat].self, from: data)
+                let decodedCats = try decoder.decode([Cat].self, from: data)
                 
                 DispatchQueue.main.async {
-//                    self.cats = [decodedCat]
-                    self.cats = decodedCat
-//                    print(self.cats[0].createdAt, "isGif: \(decodedCat.isGif)")
+                    self.cats = decodedCats
                     self.configureLayoutHierarchy()
                     self.configureDataSource()
                 }
@@ -66,11 +56,20 @@ class ViewController: UIViewController {
         // resize collectionView to view controller edges. one-line  Alternative to AutoLayout Constraints
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
+        
+        // Data Cell
         collectionView.register(ItemCell.self, forCellWithReuseIdentifier: ItemCell.reuseIdentifier)
-//        collectionView.register(MyCell.self, forCellWithReuseIdentifier: MyCell.reuseIdentifier)
+        
         view.addSubview(collectionView)
+        
+        // Delegate methods for user actions
+        collectionView.delegate = self
+        
     }
     
+    /**
+                createLayout() specifies spacing of the elements with the view
+     */
     private func createLayout() -> UICollectionViewLayout {
         // The LayoutGroup(:subitems, :count) will override this itemSize
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),                                            heightDimension: .fractionalHeight(1.0))
@@ -109,8 +108,52 @@ class ViewController: UIViewController {
     
         dataSource.apply(snapshot, animatingDifferences: false)
     }
-
 }
+
+extension ViewController: UICollectionViewDelegate {
+    // Click Data Cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Clicked: ", cats[indexPath.row].urlStr)
+    }
+}
+
+extension ViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard var searchText = searchController.searchBar.text, searchText.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 else {
+            return
+        }
+        
+        searchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        //dataSource.filterText = searchController.searchBar.text
+        print("CHaging TEXT")
+        
+        // Use Combine to throttle calls to server
+        // Do any additional setup after loading the view.
+        DispatchQueue.global().async {
+            do {
+
+                let url = URL(string: CatsService.shared.getCats(with: searchText, skipTo: 0, limit: 20))!
+                let data = try Data(contentsOf: url)
+
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
+                
+                let decodedCats = try decoder.decode([Cat].self, from: data)
+                
+                DispatchQueue.main.async {
+                    self.cats = decodedCats
+                    self.configureDataSource()
+                }
+                
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    
+}
+
 
 
 

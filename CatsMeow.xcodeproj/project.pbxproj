@@ -19,6 +19,7 @@
 		5671D51C27965E43003020AB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5671D51B27965E43003020AB /* Constants.swift */; };
 		5671D53E27967ED2003020AB /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5671D53D27967ED2003020AB /* ItemCell.swift */; };
 		5671D5432796AAEF003020AB /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5671D5422796AAEF003020AB /* SDWebImage */; };
+		5671D5472796BC50003020AB /* SelfConfigCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5671D5462796BC50003020AB /* SelfConfigCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		5671D50F2795FC1A003020AB /* Iso8601FormatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso8601FormatExtensions.swift; sourceTree = "<group>"; };
 		5671D51B27965E43003020AB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5671D53D27967ED2003020AB /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		5671D5462796BC50003020AB /* SelfConfigCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfigCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		5671D51727965D57003020AB /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5671D5462796BC50003020AB /* SelfConfigCell.swift */,
 				5671D53D27967ED2003020AB /* ItemCell.swift */,
 			);
 			path = Components;
@@ -202,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5671D50A27955C83003020AB /* CatsService.swift in Sources */,
+				5671D5472796BC50003020AB /* SelfConfigCell.swift in Sources */,
 				5671D5102795FC1A003020AB /* Iso8601FormatExtensions.swift in Sources */,
 				5671D4FA27955B08003020AB /* ViewController.swift in Sources */,
 				5671D51C27965E43003020AB /* Constants.swift in Sources */,

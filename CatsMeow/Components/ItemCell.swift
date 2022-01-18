@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class ItemCell: UICollectionViewCell {
+class ItemCell: UICollectionViewCell, SelfConfiguringCell {
     static let reuseIdentifier: String = "ItemCell"
 
     let name = UILabel()
@@ -38,10 +38,7 @@ class ItemCell: UICollectionViewCell {
         subtitle.text = cat.urlStr
         print(cat.urlStr)
         let placeholderImg = UIImage(systemName: "icloud.and.arrow.down")
-//        imageView.image = UIImage(systemName: "icloud.and.arrow.down")
-                
-//        imageView.sd_setShowActivityIndicatorView(true)
-//        imageView.//sd_setIndicatorStyle(.gray)
+
         imageView.sd_setImage(with: cat.fullUrl, placeholderImage: placeholderImg)
     }
 
