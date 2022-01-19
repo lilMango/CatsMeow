@@ -18,13 +18,20 @@ struct Cat: Codable, Hashable {
         case createdAt = "created_at"
         
     }
+    
     var urlStr: String {
-        return "\(K.CatsAPI.baseUrl)/cat/\(id)"
+        var str = "\(K.CatsAPI.baseUrl)/cat/\(id)"
+        if isNegativeFilter {
+            str += "?filter=negative"
+        }
+        return str
     }
 
     var fullUrl: URL {
         return URL(string: urlStr )!
     }
+    
+    var isNegativeFilter: Bool = false
     
     var isGif: Bool {
         return !tags.filter { $0.contains("gif")}.isEmpty
@@ -34,6 +41,9 @@ struct Cat: Codable, Hashable {
         return Cat(id: "hiii", createdAt:Date.now, tags:[])
     }
 
+    mutating func toggleNegativeFilter() {
+        self.isNegativeFilter = !self.isNegativeFilter
+    }
     // Hashable protocol
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)

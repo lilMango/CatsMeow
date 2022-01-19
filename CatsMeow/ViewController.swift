@@ -20,18 +20,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
         search.searchBar.placeholder = "Find a cat type"
         navigationItem.searchController = search
         
+        self.configureLayoutHierarchy()
+        self.configureDataSource()
+        
         // Do any additional setup after loading the view.
         DispatchQueue.global().async {
             do {
                 print(CatsService.shared.getRandomCat())
-                let url = URL(string: CatsService.shared.getCats(with: "gif", skipTo: 0, limit: 20))!
+                let url = URL(string: CatsService.shared.getCatsUrlString(with: "gif", skipTo: 0, limit: 20))!
                 let data = try Data(contentsOf: url)
 
                 let decoder = JSONDecoder()
@@ -41,8 +43,7 @@ class ViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.cats = decodedCats
-                    self.configureLayoutHierarchy()
-                    self.configureDataSource()
+                    self.updateDataSource()
                 }
                 
             } catch {
@@ -97,10 +98,10 @@ class ViewController: UIViewController {
                 fatalError("Can't create new cell")
             }
             cell.configure(with: identifier)
-//            cell.textLabel.text = "\(identifier)"
             return cell
         }
-        
+    }
+    private func updateDataSource() {
         // initial data
         var snapshot = NSDiffableDataSourceSnapshot<Section, Cat>()
         snapshot.appendSections([.main])
@@ -114,6 +115,8 @@ extension ViewController: UICollectionViewDelegate {
     // Click Data Cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Clicked: ", cats[indexPath.row].urlStr)
+        cats[indexPath.row].toggleNegativeFilter()
+        updateDataSource()
     }
 }
 
@@ -124,15 +127,15 @@ extension ViewController: UISearchResultsUpdating {
         }
         
         searchText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        //dataSource.filterText = searchController.searchBar.text
+
         print("CHaging TEXT")
         
-        // Use Combine to throttle calls to server
+        // TODO: Use Combine to throttle calls to server
         // Do any additional setup after loading the view.
         DispatchQueue.global().async {
             do {
 
-                let url = URL(string: CatsService.shared.getCats(with: searchText, skipTo: 0, limit: 20))!
+                let url = URL(string: CatsService.shared.getCatsUrlString(with: searchText, skipTo: 0, limit: 20))!
                 let data = try Data(contentsOf: url)
 
                 let decoder = JSONDecoder()
@@ -142,7 +145,7 @@ extension ViewController: UISearchResultsUpdating {
                 
                 DispatchQueue.main.async {
                     self.cats = decodedCats
-                    self.configureDataSource()
+                    self.updateDataSource()
                 }
                 
             } catch {
@@ -150,7 +153,6 @@ extension ViewController: UISearchResultsUpdating {
             }
         }
     }
-    
     
 }
 

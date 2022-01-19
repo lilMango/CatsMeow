@@ -12,7 +12,7 @@ protocol CatsProtocol {
     func getBaseUrl() -> String
     func getRandomCat() -> String
     func getCatTag() -> Void
-    func getCats(with tags:String, skipTo cursor:Int, limit: Int) -> String
+    func getCatsUrlString(with tags:String, skipTo cursor:Int, limit: Int) -> String
     
 }
 
@@ -31,7 +31,7 @@ class CatsService: CatsProtocol {
         
     }
     
-    func getCats(with tags:String, skipTo cursor:Int = 0, limit: Int = 10) -> String {
+    func getCatsUrlString(with tags:String, skipTo cursor:Int = 0, limit: Int = 10) -> String {
         return "\(K.CatsAPI.baseUrl)/api/cats?tags=\(tags)&skip=\(cursor)&limit=\(limit)"
     }
 }
